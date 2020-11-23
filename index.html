@@ -185,7 +185,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-11-23 10:03:54 / 修改时间：10:42:43" itemprop="dateCreated datePublished" datetime="2020-11-23T10:03:54+08:00">2020-11-23</time>
+              <time title="创建时间：2020-11-23 10:03:54 / 修改时间：11:19:04" itemprop="dateCreated datePublished" datetime="2020-11-23T10:03:54+08:00">2020-11-23</time>
             </span>
 
           
@@ -199,125 +199,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <pre><code class="less">&quot;===================&quot;
-&quot;1.基本设置&quot;
-&quot;===================&quot;
-set wildmenu&quot;按TAB键时命令行自动补齐&quot;
-set ignorecase&quot;忽略大小写&quot;
-set number &quot;显示行号&quot;
-set visualbell&quot;禁止响铃&quot;
-set ruler&quot;显示当前光标位置&quot;
-set autoread&quot;文件在Vim之外修改过，自动重新读入&quot;
-set autowrite&quot;设置自动保存内容&quot;
-set autochdir&quot;当前目录随着被编辑文件的改变而改变&quot;
-set nocp &quot;使用vim而非vi&quot;
-set mouse=a&quot;开启鼠标支持&quot;
-map 9 $&quot;通过9跳转到行末尾,0默认跳转到行首&quot;
-map &lt;silent&gt;  &lt;C-A&gt;  gg v G &quot;Ctrl-A 选中所有内容&quot;
-filetype on &quot;启动文件类型检查&quot;
-filetype plugin on &quot;运行vim加载文件类型插件&quot;
-
-&quot;===================&quot;
-&quot;2.程序开发相关的设置&quot;
-&quot;===================&quot;
-&quot;(1)使用%来选择语句块，然后使用快捷键zf来折叠&quot;
-set foldmethod=marker
-&quot;(2)注释：选中文本后，输入;c即可注释，输入;u 即可取消注释&quot;
-vmap &lt;silent&gt; ;c :s/^/\/\//&lt;CR&gt;:noh&lt;CR&gt;
-vmap &lt;silent&gt; ;u :s/\/\///&lt;CR&gt;:noh&lt;CR&gt;
-&quot;(3) 编译和运行程序的快捷键&quot;
-map &lt;silent&gt;  &lt;C-F5&gt; :make %:r &lt;CR&gt;:!./%:r&lt;CR&gt;  &quot;Ctrl+F5: 执行makefile文件&quot;
-map &lt;silent&gt;  \rr :!gcc  -Wall -g  %  -lm -o  %:r&lt;CR&gt; :!./%:r&lt;CR&gt;&quot;\rr: 编译并运行当前文件的对应程序&quot;
-map  &lt;silent&gt;  \rc :!gcc  -Wall -g -c % &lt;CR&gt;&quot;\rc:编译当前文件&quot;
-&quot;(4)源文件和头文件之间快速切换&quot;
-nmap ,a :find %:t:r. &quot;,a: 切换到任意文件。需要手动输入文件的后缀&quot;
-nmap ,c :find %:t:r.c&lt;cr&gt; &quot;,c: 切换到同名c语言的源文件&quot;
-nmap ,C :tabf %:t:r.cpp&lt;cr&gt; &quot;,C: 切换到同名c++的源文件,以tabpage形式打开&quot;
-nmap ,h :find %:t:r.h&lt;cr&gt;&quot;,h 切换到当前文件对于的头文件&quot;
-&quot;(5)其他&quot;
-syn on &quot;开启语法高亮功能&quot;
-set pastetoggle=&lt;F11&gt; &quot;F11来支持切换paste和nopaste状态。&quot;
-
-&quot;============&quot;
-&quot;3. 多窗口操作&quot;
-&quot;============&quot;
-map + &lt;C-W&gt;+  &quot;+：扩大窗口&quot;
-map - &lt;C-W&gt;-  &quot;- :   缩小窗口&quot;
-map &lt;C-l&gt; &lt;C-W&gt;l &quot;C-l 移动到右侧窗口&quot;
-map &lt;C-h&gt; &lt;C-W&gt;h &quot;C-h 移动到左侧窗口&quot;
-map &lt;C-j&gt; &lt;C-W&gt;j   &quot;C-j 移动到下方窗口&quot;
-map &lt;C-k&gt; &lt;C-W&gt;k &quot;C-k 移动到上方窗口&quot;
-
-&quot;============&quot;
-&quot;4. tabpages切换&quot;
-&quot;============&quot;
-map &lt; :tabpre&lt;CR&gt;
-map &gt; :tabnex&lt;CR&gt;
-
-&quot;=============&quot;
-&quot;5. 设置缩进&quot;
-&quot;=============&quot;
-set cindent &quot;c/c++自动缩进&quot;
-set smartindent
-set autoindent&quot;参考上一行的缩进方式进行自动缩进&quot;
-filetype indent on &quot;根据文件类型进行缩进&quot;
-set softtabstop=4 &quot;4 character as a tab&quot;
-set shiftwidth=4
-set smarttab
-
-&quot;=================&quot;
-&quot;6. 当前文件内搜索选项&quot;
-&quot;=================&quot;
-set hlsearch &quot;开启搜索结果的高亮显示&quot;
-set incsearch &quot;边输入边搜索(实时搜索)&quot;
-
-
-&quot;==========================&quot;
-&quot;8.不要交换文件和备份文件，减少冲突&quot;
-&quot;==========================&quot;
-set noswapfile
-set nobackup
-set nowritebackup
-
-&quot;=============&quot;
-&quot;9. 查找和替换文本&quot;
-&quot;=============&quot;
-nmap ;s :%s/\&lt;&lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;\&gt;/
-nmap ;g :vimgrep &lt;C-R&gt;=expand(&quot;&lt;cword&gt;&quot;)&lt;CR&gt;
-
-&quot;========================&quot;
-&quot; 10.快捷文本输入&quot;
-&quot;========================&quot;
-map &lt;silent&gt;  \d a&lt;C-R&gt;=strftime(&quot;%Y/%m/%d %A&quot;)&lt;CR&gt;  &quot;快捷输入日期&quot;
-map &lt;silent&gt;  \t a&lt;C-R&gt;=strftime(&quot;%Y/%m/%d %H:%M:%S&quot;)&lt;CR&gt;&quot;快捷输入时间&quot;
-map &lt;silent&gt;   ,d :split ~/Dropbox/Doc/ &lt;CR&gt;
-iab --l  --------------------
-iab ==l  ====================
-
-&quot;========================&quot;
-&quot;11.txt文件按照wiki语法高亮&quot;
-&quot;========================&quot;
- autocmd BufNewFile *.txt set ft=confluencewiki
- autocmd BufEnter *.txt set ft=confluencewiki
-
- &quot;======================&quot;
- &quot;12.设置文件编码，解决中文乱码问题&quot;
- &quot;======================&quot;
- if has(&quot;multi_byte&quot;)
-    set fileencodings=utf-8,ucs-bom,cp936,cp1250,big5,euc-jp,euc-kr,latin1
- else
-    echoerr &quot;Sorry, this version of (g)vim was not compiled with multi_byte&quot;
- endif
-
- &quot;===================&quot;
- &quot;13. 对gvim 的设置&quot;
- &quot;==================&quot;
- if has(&quot;gui_running&quot;)
-     colorscheme  morning
-     set guifont=Monaco:h13
-     set guioptions=mr &quot;只显示菜单和右侧滚动条&quot;
- endif</code></pre>
-
+          <p>我的一些vim的配置信息</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/11/23/vimrc%E9%85%8D%E7%BD%AE/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -367,7 +257,7 @@ iab ==l  ====================
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-23 10:41:10" itemprop="dateModified" datetime="2020-11-23T10:41:10+08:00">2020-11-23</time>
+                <time title="修改时间：2020-11-23 11:19:20" itemprop="dateModified" datetime="2020-11-23T11:19:20+08:00">2020-11-23</time>
               </span>
 
           
@@ -382,15 +272,14 @@ iab ==l  ====================
 
       
           <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/11/16/hello-world/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -477,6 +366,9 @@ iab ==l  ====================
       </div>
   </nav>
 </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
 
 
 
